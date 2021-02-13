@@ -94,6 +94,8 @@ _.PLAYED_BEFORE = !!window.localStorage.continueChapter;
 
 n3: Welcome! This is less of a "game," more of an interactive story. Hope you like reading, sucka!
 
+n3: ...Unless, of course, you're playing a modded dub of the game, in which case, enjoy the show!
+
 n3: So before we start, how would *you* like to read?
 
 `publish("show_options_bottom")`

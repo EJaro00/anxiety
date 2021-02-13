@@ -377,9 +377,10 @@ Game.executeText = function(line){
 
 		// Who's speaking?
 		// b: Beebee, h: Hong, n: Narrator, n2: Narrator 2, n3: Narrator 3
-		var regex = /^([^\:]+)\:(.*)/
+		var regex = /^([^\:]+)\:(.*)\:(.*)/
 		var speaker = line.match(regex)[1].trim();
-		var dialogue = line.match(regex)[2].trim();
+		var audio = line.match(regex)[2].trim();
+		var dialogue = line.match(regex)[3].trim();
 
 		// IF IT'S A SPECIAL ATTACK, SKIP ALL THIS
 		if(speaker=="fear_harm" || speaker=="fear_alone" || speaker=="fear_bad"){
@@ -479,6 +480,9 @@ Game.executeText = function(line){
 		// IF IT'S BEEBEE, HONG, or NARRATOR 3, or HUNTER, or AL or SHIRE
 		if(speaker=="b" || speaker=="h" || speaker=="h2" || speaker=="h3" || speaker=="n3" || speaker=="r" || speaker=="a" || speaker=="s"){
 
+			//S O U N D?
+			sfx("voice_test", {volume:0.3});
+
 			// Put in the text, each character a DIFFERENT SPAN...
 			var span, chr;
 			var isItalicized = false;
@@ -516,29 +520,6 @@ Game.executeText = function(line){
 						div.children[index].style.opacity = 1;
 
 						// And SOUND?
-						if(!forceNoSound){
-							var chr = div.children[index].innerHTML;
-							if(chr!=" "){
-								if(speaker=="h" || speaker=="h2"){
-									voice("hong", {volume:0.3});
-								}
-								if(speaker=="b" || speaker=="h3"){
-									voice("beebee", {volume:0.5});
-								}
-								if(speaker=="n3"){
-									voice("typewriter", {volume:0.5});
-								}
-								if(speaker=="r"){
-									voice("hunter", {volume:0.17});
-								}
-								if(speaker=="a"){
-									voice("al", {volume:0.3});
-								}
-								if(speaker=="s"){
-									voice("shire", {volume:0.4});
-								}
-							}
-						}
 
 					}, interval);
 				})(i, interval, speaker, Game.FORCE_NO_VOICE);
